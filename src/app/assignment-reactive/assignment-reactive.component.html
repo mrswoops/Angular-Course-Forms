@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="name">Project Name</label>
+                    <input type="text" class="form-control" formControlName="name" id="name">
+                    <p class="help-block"
+                        *ngIf="projectForm.get('name').value && projectForm.get('name').value.length != 0 && projectForm.get('name').invalid">
+                        Project name
+                        cannot be
+                        'test'.</p>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" class="form-control" formControlName="email">
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select formControlName="status" class="form-control">
+                        <option value="stable">Stable</option>
+                        <option value="critical">Critical</option>
+                        <option value="finished">Finished</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <div class="row" *ngIf="submitted">
+        <div class="col-xs-12">
+            <h3>Your Data</h3>
+            <p>Project Name: {{ projectForm.controls['name'].value }}</p>
+            <p>Email: {{ projectForm.controls['email'].value }}</p>
+            <p>Status: {{ projectForm.controls['status'].value }}</p>
+        </div>
+    </div>
+</div>
